@@ -19,6 +19,9 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({ name: "", phone: "" });
+
   const generateTimes = () => {
     const times = [];
     let current = 10;
@@ -42,7 +45,14 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
   };
 
   const handleConfirm = () => {
-    setStep("success");
+    if (!formData.name || !formData.phone) return;
+    
+    setIsSubmitting(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setStep("success");
+    }, 1500);
   };
 
   return (
@@ -59,6 +69,7 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
                 else onClose();
               }}
               className="text-[#0A84FF] text-[17px] font-normal tracking-tight active:opacity-50"
+              disabled={isSubmitting}
             >
               {step === "professional" ? "Cancelar" : "Atrás"}
             </button>
@@ -77,7 +88,12 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
           <div className="w-16" /> {/* Placeholder for right button to maintain center alignment */}
         </DialogHeader>
 
-        <div className="flex-1 overflow-y-auto bg-black p-4">
+        <div className="flex-1 overflow-y-auto bg-black p-4 relative">
+          {isSubmitting && (
+             <div className="absolute inset-0 bg-black/50 z-20 flex items-center justify-center backdrop-blur-sm">
+                <div className="w-8 h-8 border-4 border-[#0A84FF] border-t-transparent rounded-full animate-spin"></div>
+             </div>
+          )}
           
           {step === "professional" && (
             <div className="space-y-6">
@@ -180,6 +196,8 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
                   <span className="text-[17px] text-white w-24">Nombre</span>
                   <input 
                     type="text" 
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
                     placeholder="Tu nombre completo" 
                     className="flex-1 bg-transparent text-[17px] text-white focus:outline-none placeholder:text-[#8E8E93]"
                   />
@@ -188,6 +206,8 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
                   <span className="text-[17px] text-white w-24">Teléfono</span>
                   <input 
                     type="tel" 
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     placeholder="+34" 
                     className="flex-1 bg-transparent text-[17px] text-white focus:outline-none placeholder:text-[#8E8E93]"
                   />
@@ -197,7 +217,8 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
               <div className="mt-8">
                 <button 
                   onClick={handleConfirm} 
-                  className="w-full bg-[#0A84FF] text-white font-semibold text-[17px] py-3.5 rounded-[10px] active:bg-[#007AFF] transition-colors"
+                  disabled={!formData.name || !formData.phone || isSubmitting}
+                  className="w-full bg-[#0A84FF] disabled:bg-[#0A84FF]/50 disabled:text-white/50 text-white font-semibold text-[17px] py-3.5 rounded-[10px] active:bg-[#007AFF] transition-colors"
                 >
                   Confirmar cita
                 </button>

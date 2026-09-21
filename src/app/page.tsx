@@ -109,7 +109,12 @@ export default function Home() {
               <h2 className="text-[22px] font-bold tracking-tight mb-3 ml-2">Detalles del local</h2>
               
               <div className="bg-[#1C1C1E] rounded-[10px] overflow-hidden">
-                <div className="flex items-center ml-4 pr-4 py-3 border-b border-white/10">
+                <a 
+                  href={`https://maps.google.com/?q=${encodeURIComponent(businessConfig.address)}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center ml-4 pr-4 py-3 border-b border-white/10 active:bg-white/10 transition-colors cursor-pointer"
+                >
                   <div className="w-[30px] h-[30px] rounded-md bg-[#0A84FF] flex items-center justify-center mr-3 shrink-0">
                     <MapPin className="w-4 h-4 text-white" />
                   </div>
@@ -117,7 +122,8 @@ export default function Home() {
                     <span className="text-[17px] text-white">Dirección</span>
                   </div>
                   <span className="text-[17px] text-[#8E8E93] truncate max-w-[150px]">{businessConfig.address}</span>
-                </div>
+                  <ChevronRight className="w-5 h-5 text-[#3A3A3C] ml-2" />
+                </a>
 
                 <div className="flex items-center ml-4 pr-4 py-3 border-b border-white/10">
                   <div className="w-[30px] h-[30px] rounded-md bg-[#32ADE6] flex items-center justify-center mr-3 shrink-0">
@@ -129,7 +135,10 @@ export default function Home() {
                   <span className="text-[17px] text-[#8E8E93]">L-S {businessConfig.workingHours.start}-{businessConfig.workingHours.end}</span>
                 </div>
 
-                <div className="flex items-center ml-4 pr-4 py-3">
+                <a 
+                  href="tel:+34600123456"
+                  className="flex items-center ml-4 pr-4 py-3 active:bg-white/10 transition-colors cursor-pointer"
+                >
                   <div className="w-[30px] h-[30px] rounded-md bg-[#34C759] flex items-center justify-center mr-3 shrink-0">
                     <Phone className="w-4 h-4 text-white" />
                   </div>
@@ -137,7 +146,8 @@ export default function Home() {
                     <span className="text-[17px] text-white">Llamar</span>
                   </div>
                   <span className="text-[17px] text-[#8E8E93]">+34 600 123 456</span>
-                </div>
+                  <ChevronRight className="w-5 h-5 text-[#3A3A3C] ml-2" />
+                </a>
               </div>
             </div>
           </TabsContent>
