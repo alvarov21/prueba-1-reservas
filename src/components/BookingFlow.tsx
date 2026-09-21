@@ -60,12 +60,12 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
       <DialogContent className="sm:max-w-md w-full h-[92vh] sm:h-[85vh] p-0 flex flex-col overflow-hidden bg-[#000000] border-none rounded-t-[32px] sm:rounded-[32px] gap-0 font-[system-ui,-apple-system,sans-serif]">
         
         {/* iOS Sheet Drag Handle */}
-        <div className="w-full flex justify-center pt-3 pb-1 bg-[#1C1C1E]">
+        <div className="w-full flex justify-center pt-3 pb-1 bg-[#1C1C1E]/60 backdrop-blur-2xl">
           <div className="w-10 h-1.5 bg-white/20 rounded-full" />
         </div>
 
         {/* Translucent Navigation Bar */}
-        <DialogHeader className="px-4 py-3 bg-[#1C1C1E]/95 backdrop-blur-xl flex flex-row items-center justify-between sticky top-0 z-10 shrink-0 shadow-sm border-b border-white/[0.08]">
+        <DialogHeader className="px-4 py-3 bg-[#1C1C1E]/60 backdrop-blur-2xl/95 backdrop-blur-xl flex flex-row items-center justify-between sticky top-0 z-10 shrink-0 shadow-sm border-b border-white/[0.08]">
           {step !== "success" ? (
             <button 
               onClick={() => {
@@ -105,7 +105,7 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
           {step === "professional" && (
             <div className="space-y-6 pb-8">
               <h2 className="text-[34px] font-bold tracking-tight mb-4 ml-2 mt-2 leading-tight">¿Con quién?</h2>
-              <div className="bg-[#1C1C1E] rounded-2xl overflow-hidden">
+              <div className="bg-[#1C1C1E]/60 backdrop-blur-2xl rounded-2xl overflow-hidden">
                 <div 
                   className="flex items-center ml-4 pr-4 py-3.5 border-b border-white/[0.08] cursor-pointer active:bg-white/10 transition-colors"
                   onClick={() => handleProfessionalSelect({ name: "Cualquiera", id: "any" })}
@@ -145,7 +145,7 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
             <div className="space-y-8 pb-10">
               <div>
                 <h2 className="text-[28px] font-bold tracking-tight mb-4 ml-2 mt-2">Día</h2>
-                <div className="bg-[#1C1C1E] rounded-2xl p-3 flex justify-center">
+                <div className="bg-[#1C1C1E]/60 backdrop-blur-2xl rounded-2xl p-3 flex justify-center">
                   <Calendar
                     mode="single"
                     selected={selectedDate}
@@ -157,7 +157,7 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
               
               <div>
                 <h2 className="text-[28px] font-bold tracking-tight mb-4 ml-2">Hora</h2>
-                <div className="bg-[#1C1C1E] rounded-2xl overflow-hidden">
+                <div className="bg-[#1C1C1E]/60 backdrop-blur-2xl rounded-2xl overflow-hidden">
                   <ScrollArea className="h-[280px] w-full">
                     {availableTimes.map((time, index) => (
                       <div
@@ -179,7 +179,7 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
             <div className="space-y-8 pb-10">
               <h2 className="text-[34px] font-bold tracking-tight mb-2 ml-2 mt-2 leading-tight">Confirmar</h2>
               
-              <div className="bg-[#1C1C1E] rounded-2xl overflow-hidden">
+              <div className="bg-[#1C1C1E]/60 backdrop-blur-2xl rounded-2xl overflow-hidden">
                 <div className="flex justify-between items-center ml-4 pr-4 py-3.5 border-b border-white/[0.08]">
                   <span className="text-[17px] text-white font-medium tracking-tight">Servicio</span>
                   <span className="text-[17px] text-[#8E8E93] tracking-tight truncate max-w-[180px]">{service.name}</span>
@@ -208,7 +208,7 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
               
               <div>
                 <h3 className="text-[15px] font-medium tracking-tight text-[#8E8E93] mb-2 ml-4 uppercase">Tus Datos</h3>
-                <div className="bg-[#1C1C1E] rounded-2xl overflow-hidden">
+                <div className="bg-[#1C1C1E]/60 backdrop-blur-2xl rounded-2xl overflow-hidden">
                   <div className="flex items-center ml-4 pr-4 py-3.5 border-b border-white/[0.08]">
                     <span className="text-[17px] text-white font-medium tracking-tight w-24">Nombre</span>
                     <input 
@@ -255,7 +255,7 @@ export default function BookingFlow({ service, onClose }: BookingFlowProps) {
               </p>
               <button 
                 onClick={onClose} 
-                className="w-full bg-[#1C1C1E] text-[#0A84FF] font-bold tracking-tight text-[17px] py-4 rounded-xl active:bg-[#2C2C2E] transition-colors mt-12"
+                className="w-full bg-[#1C1C1E]/60 backdrop-blur-2xl text-[#0A84FF] font-bold tracking-tight text-[17px] py-4 rounded-xl active:bg-[#2C2C2E] transition-colors mt-12"
               >
                 Volver al inicio
               </button>

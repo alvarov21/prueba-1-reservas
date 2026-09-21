@@ -17,16 +17,22 @@ export default function Home() {
   }, {} as Record<string, typeof businessConfig.services>);
 
   return (
-    <main className="min-h-screen bg-[#000000] text-white pb-24 font-[system-ui,-apple-system,sans-serif]">
+    <main className="min-h-screen bg-black/40 text-white pb-24 font-[system-ui,-apple-system,sans-serif] relative">
+      {/* Full-screen blurred ambient background */}
+      <div 
+        className="fixed inset-0 bg-cover bg-center opacity-[0.15] blur-3xl scale-110 pointer-events-none -z-10"
+        style={{ backgroundImage: `url(${businessConfig.image})` }}
+      />
+
       {/* iOS 17 style immersive header */}
       <div className="relative pt-12 pb-6 px-4">
         <div 
-          className="absolute inset-0 top-0 h-[280px] bg-cover bg-center opacity-40 mask-image:linear-gradient(to_bottom,black,transparent)"
-          style={{ backgroundImage: `url(${businessConfig.image})`, WebkitMaskImage: 'linear-gradient(to bottom, black 20%, transparent 100%)' }}
+          className="absolute inset-0 top-0 h-[400px] bg-cover bg-center opacity-60 mask-image:linear-gradient(to_bottom,black,transparent)"
+          style={{ backgroundImage: `url(${businessConfig.image})`, WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)' }}
         />
-        <div className="relative z-10 pt-[100px]">
-          <h1 className="text-[34px] font-bold tracking-tight leading-tight">{businessConfig.name}</h1>
-          <p className="text-[17px] text-gray-300 mt-1 font-medium tracking-tight">{businessConfig.description}</p>
+        <div className="relative z-10 pt-[220px]">
+          <h1 className="text-[36px] font-bold tracking-tight leading-tight drop-shadow-md">{businessConfig.name}</h1>
+          <p className="text-[17px] text-gray-200 mt-1 font-medium tracking-tight drop-shadow-sm">{businessConfig.description}</p>
         </div>
       </div>
 
@@ -41,7 +47,7 @@ export default function Home() {
 
         {/* Modern iOS Segmented Control */}
         <Tabs defaultValue="services" className="w-full">
-          <TabsList className="w-full bg-[#1C1C1E] p-[3px] h-[32px] rounded-[9px] mb-8 flex">
+          <TabsList className="w-full bg-[#1C1C1E]/60 backdrop-blur-2xl p-[3px] h-[32px] rounded-[9px] mb-8 flex">
             <TabsTrigger value="services" className="flex-1 rounded-[7px] text-[13px] font-semibold tracking-tight shadow-none data-[state=active]:bg-[#636366] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all">Servicios</TabsTrigger>
             <TabsTrigger value="team" className="flex-1 rounded-[7px] text-[13px] font-semibold tracking-tight shadow-none data-[state=active]:bg-[#636366] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all">Equipo</TabsTrigger>
             <TabsTrigger value="info" className="flex-1 rounded-[7px] text-[13px] font-semibold tracking-tight shadow-none data-[state=active]:bg-[#636366] data-[state=active]:text-white data-[state=active]:shadow-sm transition-all">Info</TabsTrigger>
@@ -51,7 +57,7 @@ export default function Home() {
             {Object.entries(servicesByCategory).map(([category, services]) => (
               <div key={category}>
                 <h2 className="text-[22px] font-bold tracking-tight mb-3 ml-2">{category}</h2>
-                <div className="bg-[#1C1C1E] rounded-2xl overflow-hidden">
+                <div className="bg-[#1C1C1E]/60 backdrop-blur-2xl rounded-2xl overflow-hidden">
                   {services.map((service, index) => (
                     <div 
                       key={service.id} 
@@ -82,7 +88,7 @@ export default function Home() {
 
           <TabsContent value="team" className="animate-in fade-in duration-300">
             <h2 className="text-[22px] font-bold tracking-tight mb-3 ml-2">Nuestros Barberos</h2>
-            <div className="bg-[#1C1C1E] rounded-2xl overflow-hidden">
+            <div className="bg-[#1C1C1E]/60 backdrop-blur-2xl rounded-2xl overflow-hidden">
               {businessConfig.professionals.map((prof, index) => (
                 <div key={prof.id} className="flex flex-col cursor-pointer active:bg-white/10 transition-colors">
                   <div className={`ml-4 pr-4 py-3 flex items-center ${index !== businessConfig.professionals.length - 1 ? 'border-b border-white/[0.08]' : ''}`}>
@@ -105,7 +111,7 @@ export default function Home() {
             <div>
               <h2 className="text-[22px] font-bold tracking-tight mb-3 ml-2">Información del local</h2>
               
-              <div className="bg-[#1C1C1E] rounded-2xl overflow-hidden">
+              <div className="bg-[#1C1C1E]/60 backdrop-blur-2xl rounded-2xl overflow-hidden">
                 <a 
                   href={`https://maps.google.com/?q=${encodeURIComponent(businessConfig.address)}`} 
                   target="_blank" 
